@@ -14,12 +14,11 @@ Author: Gary Sztajnman
 '''
 
 
-
-
 class TreeNode(object):
     def __init__(self,val=None):
         self.val=val
         self.children=[]
+
 
 class QueueNode(object):
     def __init__(self,node=None,level=None):
@@ -45,7 +44,6 @@ class queue(object):
             self.head = self.tail = None
         else:
             self.head = node.next
-
         self.length-=1
         return node
 
@@ -61,7 +59,6 @@ class queue(object):
             self.tail = node
             self.tail.next = previous
             previous.next = self.tail
-
         self.length+=1
 
     def notempty(self):
@@ -71,7 +68,6 @@ class queue(object):
         return self.length
 
 
-
 def BFS_level(root, level=0):
     '''
     Explore a graph using BFS keeping track of each level.
@@ -79,22 +75,18 @@ def BFS_level(root, level=0):
     '''
     if not isinstance(root,TreeNode):
         raise TypeError, 'Input is not a TreeNode'
-
     q = queue()
     q.enqueue(root,level)
     visited = set([root])
-
     print '...Start graph exploration by level'
     print 'level : {}'.format(level)
 
     while q.notempty():
         node = q.dequeue()
-
         # Updating and printing level
         if node.level != level:
             level = node.level
             print 'level : {}'.format(node.level)
-
         # Exploring graph using BFS
         print '\tNode : {}'.format(node.node.val)
         for child in node.node.children:
@@ -103,8 +95,7 @@ def BFS_level(root, level=0):
                 q.enqueue(child,node.level+1)
 
 
-############################################################
-
+##################################################################
 if __name__ == "__main__":
     ## Filling a graph for example
     Groot = TreeNode(0)
@@ -112,7 +103,6 @@ if __name__ == "__main__":
     Groot.children[0].children = [TreeNode(4),TreeNode(5)]
     Groot.children[2].children = [TreeNode(6)]
     Groot.children[0].children[0].children = [TreeNode(7), Groot.children[1]]
-
 
     ## Exploring the graph
     BFS_level(Groot)
